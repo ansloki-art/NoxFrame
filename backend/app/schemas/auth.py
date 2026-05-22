@@ -7,3 +7,8 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+class OwnerResponse(BaseModel):
+    email: str
+    
+    model_config = {"from_attributes": True}
