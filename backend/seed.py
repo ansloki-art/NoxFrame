@@ -1,7 +1,9 @@
 from app.core.database import SessionLocal
 from app.models.owner import Owner
 from app.models.category import Category
+from app.models.profile import Profile
 from passlib.context import CryptContext
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -34,8 +36,25 @@ def seed_categories(db):
     db.commit()
     print(f"{len(categories)} categories berhasil dibuat!")
 
+def seed_profile(db):
+    existing = db.query(Profile).first()
+    if existing:
+        print("Profile udah ada, skip.")
+        return
+    profile = Profile(
+        display_name="NoxFrame",
+        tagline="Capture Beyond Vision",
+        bio="Fotografer profesional berbasis di Banda Aceh.",
+        whatsapp_number="628xxxxxxxxxx",
+        city="Banda Aceh",
+    )
+    db.add(profile)
+    db.commit()
+    print("Profile berhasil dibuat!")
+
 if __name__ == "__main__":
     db = SessionLocal()
     seed_owner(db)
     seed_categories(db)
+    seed_profile(db)
     db.close()
