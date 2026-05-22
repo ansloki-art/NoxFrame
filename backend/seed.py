@@ -1,27 +1,41 @@
 from app.core.database import SessionLocal
 from app.models.owner import Owner
+from app.models.category import Category
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-def seed():
-    db = SessionLocal()
-    
+def seed_owner(db):
     existing = db.query(Owner).first()
     if existing:
         print("Owner udah ada, skip.")
         return
-
     owner = Owner(
         email="admin@noxframe.com",
         password_hash=pwd_context.hash("admin123")
     )
-    
     db.add(owner)
     db.commit()
     print("Owner berhasil dibuat!")
-    print(f"Email: admin@noxframe.com")
-    print(f"Password: admin123")
+
+def seed_categories(db):
+    existing = db.query(Category).first()
+    if existing:
+        print("Categories udah ada, skip.")
+        return
+    categories = [
+        Category(name="Wedding", slug="wedding", order_index=0),
+        Category(name="Prewedding", slug="prewedding", order_index=1),
+        Category(name="Portrait", slug="portrait", order_index=2),
+        Category(name="Family", slug="family", order_index=3),
+        Category(name="Event", slug="event", order_index=4),
+    ]
+    db.add_all(categories)
+    db.commit()
+    print(f"{len(categories)} categories berhasil dibuat!")
 
 if __name__ == "__main__":
-    seed()
+    db = SessionLocal()
+    seed_owner(db)
+    seed_categories(db)
+    db.close()
