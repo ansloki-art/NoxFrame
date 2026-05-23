@@ -23,8 +23,9 @@ export default function Portfolio() {
   }, [activeSlug])
 
   return (
-    <div className="min-h-screen bg-dark px-6 py-12">
+    <div className="min-h-screen bg-dark">
       <Navbar />
+      <div className="px-6 py-12">
       <h1 className="text-4xl font-bold text-gold mb-8 text-center tracking-widest uppercase">
         Portfolio
       </h1>
@@ -39,7 +40,7 @@ export default function Portfolio() {
               : 'text-gold border-gold/40 hover:border-gold'
           }`}
         >
-          All
+          Semua
         </button>
         {categories.map(cat => (
           <button
@@ -58,20 +59,17 @@ export default function Portfolio() {
 
       {/* Photo Grid */}
       {loading ? (
-        <p className="text-center text-gold/60">Loading...</p>
+        <p className="text-center text-gold/60">Memuat...</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {photos.map(photo => (
-            <div key={photo.id} className="aspect-square overflow-hidden">
-              <img
-                src={photo.thumbnail_url}
-                alt={photo.caption || 'NoxFrame'}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
-              />
-            </div>
+        <div className="columns-2 md:columns-4 gap-2">
+  {photos.map(photo => (
+    <div key={photo.id} className="mb-2 break-inside-avoid">
+      <img src={photo.image_url} alt={photo.caption || 'NoxFrame'} className="w-full h-auto hover:opacity-90 transition-opacity cursor-pointer" loading='lazy' />
+    </div>
           ))}
         </div>
       )}
+      </div>
     </div>
   )
 }

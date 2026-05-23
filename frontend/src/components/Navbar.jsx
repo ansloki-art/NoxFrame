@@ -14,13 +14,13 @@ export default function Navbar() {
                 Portfolio
             </Link>
             <Link to="/services" className="text-white/70 hover:text-gold text-sm tracking-wider uppercase transition-colors">
-                Services
+                Layanan
             </Link>
             <Link to="/about" className="text-white/70 hover:text-gold text-sm tracking-wider uppercase transition-colors">
-                About
+                Tentang
             </Link>
             <Link to="/booking" className="px-4 py-2 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
-                Book Now
+                Pesan Sekarang
             </Link>
             </div>
         </nav>

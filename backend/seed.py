@@ -27,9 +27,9 @@ def seed_categories(db):
         return
     categories = [
         Category(name="Wedding", slug="wedding", order_index=0),
-        Category(name="Prewedding", slug="prewedding", order_index=1),
-        Category(name="Portrait", slug="portrait", order_index=2),
-        Category(name="Family", slug="family", order_index=3),
+        Category(name="Prewedd", slug="prewedd", order_index=1),
+        Category(name="Wisuda", slug="wisuda", order_index=2),
+        Category(name="Dokumentasi", slug="dokumentasi", order_index=3),
         Category(name="Event", slug="event", order_index=4),
     ]
     db.add_all(categories)

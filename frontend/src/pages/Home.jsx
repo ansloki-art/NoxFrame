@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import heroImg from '../assets/NoxFrame.jpeg'
+import api from '../lib/api'
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
         {/* Kiri: Text */}
         <div className="w-1/2 z-10 px-16 md:px-24">
           <p className="text-gold text-xs tracking-[0.5em] uppercase mb-6">
-            Capture Beyond Vision
+            Abadikan Melampaui Pandangan
           </p>
           <h1 className="text-7xl md:text-8xl font-bold text-white uppercase leading-none mb-6">
             Nox<br/>Frame
@@ -24,11 +26,11 @@ export default function Home() {
           <div className="flex gap-4">
             <Link to="/portfolio"
               className="px-8 py-3 bg-gold text-black text-sm tracking-wider uppercase font-bold hover:bg-gold-light transition-colors">
-              View Portfolio
+              Lihat Portfolio
             </Link>
             <Link to="/booking"
               className="px-8 py-3 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
-              Book Now
+              Pesan Sekarang
             </Link>
           </div>
         </div>
