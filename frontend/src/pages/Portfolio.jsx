@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '../lib/api'
+import Navbar from '../components/Navbar'
 
 export default function Portfolio() {
   const [photos, setPhotos] = useState([])
@@ -23,6 +24,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-dark px-6 py-12">
+      <Navbar />
       <h1 className="text-4xl font-bold text-gold mb-8 text-center tracking-widest uppercase">
         Portfolio
       </h1>
