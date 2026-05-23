@@ -42,7 +42,7 @@ async def upload_photo(
     db: Session = Depends(get_db),
     current_owner: str = Depends(get_current_owner)
 ):
-    if not file.content_type.startswith("image/"):
+    if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File harus berupa gambar")
 
     file_bytes = await file.read()
@@ -80,7 +80,7 @@ def delete_photo(
     try:
         delete_file(photo.image_url.replace(settings.R2_PUBLIC_URL + "/", ""))
         delete_file(photo.thumbnail_url.replace(settings.R2_PUBLIC_URL + "/", ""))
-    except:
+    except Exception:
         pass
     db.delete(photo)
     db.commit()

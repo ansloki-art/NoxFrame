@@ -1,19 +1,28 @@
-import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom'
 
-export default function App() {
-  const [status, setStatus] = useState('Checking...')
+// Public pages
+import Home from './pages/Home'
+import Portfolio from './pages/Portfolio'
+import Services from './pages/Services'
+import About from './pages/About'
+import Booking from './pages/Booking'
 
-  useEffect(() => {
-    fetch('http://localhost:8000/health')
-    .then(res => res.json())
-    .then(data => setStatus(data.status))
-    .catch(() => setStatus('error'))
-  }, [])
+// Admin pages
+import AdminLogin from './pages/admin/Login'
+import AdminDashboard from './pages/admin/Dashboard'
 
+function App() {
   return (
-    <div className='p-8'>
-      <h1 className='text-3xl font-bold text-blue-500'>NoxFrame</h1>
-      <p>Backend status: {status}</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/portfolio" element={<Portfolio />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/booking" element={<Booking />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+    </Routes>
   )
 }
+
+export default App
