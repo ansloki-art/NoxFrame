@@ -61,9 +61,9 @@ export default function Portfolio() {
       {loading ? (
         <p className="text-center text-gold/60">Memuat...</p>
       ) : (
-        <div className="columns-2 md:columns-4 gap-2">
+        <div className="columns-2 md:columns-4 gap-4">
   {photos.map(photo => (
-    <div key={photo.id} className="mb-2 break-inside-avoid">
+    <div key={photo.id} className="mb-4 break-inside-avoid">
       <img src={photo.image_url} alt={photo.caption || 'NoxFrame'} className="w-full h-auto hover:opacity-90 transition-opacity cursor-pointer" loading='lazy' />
     </div>
           ))}
