@@ -112,7 +112,7 @@ export default function AdminPortfolio() {
         </div>
 
         {/* Photos Grid */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="gap-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)' }}>
           {photos.map(photo => (
             <div key={photo.id} className="relative group">
               <img src={photo.thumbnail_url} alt={photo.caption || 'foto'}
