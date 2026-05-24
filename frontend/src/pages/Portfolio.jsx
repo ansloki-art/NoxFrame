@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from '../lib/api'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default function Portfolio() {
   const [photos, setPhotos] = useState([])
@@ -23,12 +24,14 @@ export default function Portfolio() {
   }, [activeSlug])
 
   return (
-    <div className="min-h-screen bg-dark">
+    <div className="min-h-screen bg-dark flex flex-col">
       <Navbar />
       <div className="px-6 py-12">
-      <h1 className="text-4xl font-bold text-gold mb-8 text-center tracking-widest uppercase">
-        Portfolio
-      </h1>
+      {/* Header */}
+      <div className="pt-28 pb-8 text-center">
+        <p className="text-gold text-xs tracking-[0.5em] uppercase mb-3">Galeri Karya</p>
+        <h1 className="text-4xl font-bold text-white uppercase tracking-widest">Portfolio</h1>
+      </div>
 
       {/* Category Filter */}
       <div className="flex gap-3 justify-center flex-wrap mb-10">
@@ -62,14 +65,25 @@ export default function Portfolio() {
         <p className="text-center text-gold/60">Memuat...</p>
       ) : (
         <div className="columns-2 md:columns-4 gap-4">
-  {photos.map(photo => (
-    <div key={photo.id} className="mb-4 break-inside-avoid">
-      <img src={photo.image_url} alt={photo.caption || 'NoxFrame'} className="w-full h-auto hover:opacity-90 transition-opacity cursor-pointer" loading='lazy' />
-    </div>
+          {photos.map(photo => (
+            <div key={photo.id} className="mb-4 break-inside-avoid group relative overflow-hidden cursor-pointer">
+              <img
+                src={photo.image_url}
+                alt={photo.caption || 'NoxFrame'}
+                className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              {photo.caption && (
+                <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <p className="text-white text-xs tracking-wider">{photo.caption}</p>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       )}
       </div>
+      <Footer />
     </div>
   )
 }

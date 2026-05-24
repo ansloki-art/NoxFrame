@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import heroImg from '../assets/NoxFrame.jpeg'
 import api from '../lib/api'
 
@@ -63,6 +64,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Footer />
     </div>
   )
 }
