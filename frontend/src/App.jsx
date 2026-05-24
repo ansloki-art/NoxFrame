@@ -9,6 +9,7 @@ import AdminDashboard from './pages/admin/Dashboard'
 import AdminPortfolio from './pages/admin/Portfolio'
 import AdminPackages from './pages/admin/Packages'
 import AdminProfile from './pages/admin/Profile'
+import BookingSuccess from './pages/BookingSuccess'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/services" element={<Services />} />
       <Route path="/about" element={<About />} />
       <Route path="/booking" element={<Booking />} />
+      <Route path="/booking/success" element={<BookingSuccess />} />
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/portfolio" element={<AdminPortfolio />} />
