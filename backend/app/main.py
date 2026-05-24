@@ -7,9 +7,10 @@ app = FastAPI(title="NoxFrame API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "https://noxframe.vercel.app",
-        "https://*.vercel.app",
+    "http://localhost:5173",
+    "https://nox-frame.vercel.app",
+    "https://noxframe.vercel.app",
+    "https://*.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
