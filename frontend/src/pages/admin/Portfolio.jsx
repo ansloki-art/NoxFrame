@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
+import AdminSidebar from '../../components/AdminSidebar'
 
 export default function AdminPortfolio() {
   const [photos, setPhotos] = useState([])
@@ -51,30 +52,16 @@ export default function AdminPortfolio() {
   return (
     <div className="min-h-screen bg-dark flex">
 
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-gold/20 p-6 flex flex-col gap-2 shrink-0">
-        <h1 className="text-gold font-bold tracking-widest uppercase mb-4">NoxFrame</h1>
-        {[
-          { to: '/admin', label: 'Dashboard' },
-          { to: '/admin/portfolio', label: 'Portofolio' },
-          { to: '/admin/packages', label: 'Paket' },
-          { to: '/admin/profile', label: 'Profil' },
-        ].map(item => (
-          <a key={item.to} href={item.to}
-            className="px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
-            {item.label}
-          </a>
-        ))}
-      </aside>
+      <AdminSidebar />
 
       {/* Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
         <h2 className="text-2xl font-bold text-white mb-8">Kelola Portofolio</h2>
 
         {/* Upload Form */}
         <div className="border border-gold/20 p-6 mb-10">
           <h3 className="text-gold text-sm tracking-widest uppercase mb-6">Upload Foto Baru</h3>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Pilih Foto</label>
               <input type="file" accept="image/*"
@@ -112,7 +99,7 @@ export default function AdminPortfolio() {
         </div>
 
         {/* Photos Grid */}
-        <div className="gap-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)' }}>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
           {photos.map(photo => (
             <div key={photo.id} className="relative group">
               <img src={photo.thumbnail_url} alt={photo.caption || 'foto'}

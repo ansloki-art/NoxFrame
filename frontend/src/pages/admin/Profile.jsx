@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
+import AdminSidebar from '../../components/AdminSidebar'
 
 export default function AdminProfile() {
   const [form, setForm] = useState({
@@ -51,24 +52,9 @@ export default function AdminProfile() {
   return (
     <div className="min-h-screen bg-dark flex">
 
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-gold/20 p-6 shrink-0">
-        <h1 className="text-gold font-bold tracking-widest uppercase mb-6">NoxFrame</h1>
-        {[
-          { to: '/admin', label: 'Dashboard' },
-          { to: '/admin/bookings', label: 'Booking' },
-          { to: '/admin/portfolio', label: 'Portofolio' },
-          { to: '/admin/packages', label: 'Paket' },
-          { to: '/admin/profile', label: 'Profil' },
-        ].map(item => (
-          <a key={item.to} href={item.to}
-            className="block px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
-            {item.label}
-          </a>
-        ))}
-      </aside>
+      <AdminSidebar />
 
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
         <h2 className="text-2xl font-bold text-white mb-8">Edit Profil</h2>
 
         <div className="border border-gold/20 p-8 max-w-2xl flex flex-col gap-5">
