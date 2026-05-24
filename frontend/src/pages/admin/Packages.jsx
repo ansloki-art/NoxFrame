@@ -52,7 +52,7 @@ export default function AdminPackages() {
     const payload = {
       ...form,
       price: parseInt(form.price),
-      duration_hours: parseInt(form.duration_hours),
+      duration_hours: form.duration_hours
     }
     try {
       if (editingId) {
@@ -142,7 +142,7 @@ export default function AdminPackages() {
             <div key={pkg.id} className="border border-gold/20 p-6 flex items-start sm:items-center justify-between gap-4 flex-wrap">
               <div>
                 <p className="text-white font-bold">{pkg.name}</p>
-                <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours} jam</p>
+                <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours}</p>
                 {pkg.includes && <p className="text-white/40 text-xs mt-1">{pkg.includes}</p>}
               </div>
               <div className="flex gap-2">

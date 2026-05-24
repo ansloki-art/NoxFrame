@@ -13,7 +13,7 @@ class Package(Base):
     name = Column(String, nullable=False)
     description = Column(Text)
     price = Column(Integer, nullable=False)
-    duration_hours = Column(Integer, nullable=False)
+    duration_hours = Column(String, nullable=False)
     includes = Column(Text)
     is_active = Column(Boolean, default=True)
     order_index = Column(Integer, default=0)

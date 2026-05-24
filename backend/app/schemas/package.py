@@ -8,7 +8,7 @@ class PackageCreate(BaseModel):
     name: str
     description: Optional[str] = None
     price: int
-    duration_hours: int
+    duration_hours: str
     includes: Optional[str] = None
     order_index: int = 0
 
@@ -16,7 +16,7 @@ class PackageUpdate(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
     price: Optional[int] = None
-    duration_hours: Optional[int] = None
+    duration_hours: Optional[str] = None
     includes: Optional[str] = None
     is_active: Optional[bool] = None
     order_index: Optional[int] = None
@@ -27,7 +27,7 @@ class PackageResponse(BaseModel):
     name: str
     description: Optional[str] = None
     price: int
-    duration_hours: int
+    duration_hours: str
     includes: Optional[str] = None
     is_active: bool
     order_index: int
