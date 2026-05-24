@@ -10,6 +10,7 @@ import AdminPortfolio from './pages/admin/Portfolio'
 import AdminPackages from './pages/admin/Packages'
 import AdminProfile from './pages/admin/Profile'
 import BookingSuccess from './pages/BookingSuccess'
+import AdminBookings from './pages/admin/Bookings'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/admin/portfolio" element={<AdminPortfolio />} />
       <Route path="/admin/packages" element={<AdminPackages />} />
       <Route path="/admin/profile" element={<AdminProfile />} />
+      <Route path="/admin/bookings" element={<AdminBookings />} />
     </Routes>
   )
 }

@@ -21,6 +21,9 @@ export default function AdminDashboard() {
           <Link to="/admin" className="px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
             Dashboard
           </Link>
+          <Link to="/admin/bookings" className="px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
+            Booking
+          </Link>
           <Link to="/admin/portfolio" className="px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
             Portofolio
           </Link>
