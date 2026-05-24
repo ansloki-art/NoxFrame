@@ -25,7 +25,7 @@ export default function Home() {
             Nox<br/>Frame
           </h1>
           <p className="text-white/50 text-base md:text-lg mb-10">
-            Fotografer profesional berbasis di Banda Aceh
+            Fotografer profesional berbasis di Aceh Utara dan sekitarnya
           </p>
           <div className="flex gap-4">
             <Link to="/portfolio"
