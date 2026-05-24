@@ -3,3 +3,4 @@ from app.models.category import Category
 from app.models.profile import Profile
 from app.models.package import Package
 from app.models.portfolio_photo import PortfolioPhoto
+from app.models.booking import Booking

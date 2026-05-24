@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, profile, package, category, portfolio
+from app.routers import auth, profile, package, category, portfolio, booking
 
 app = FastAPI(title="NoxFrame API")
 
@@ -17,6 +17,7 @@ app.include_router(profile.router)
 app.include_router(package.router)
 app.include_router(category.router)
 app.include_router(portfolio.router)
+app.include_router(booking.router)
 
 @app.get("/health")
 def health_check():
