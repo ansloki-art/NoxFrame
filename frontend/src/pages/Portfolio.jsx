@@ -26,11 +26,11 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-dark flex flex-col">
       <Navbar />
-      <div className="px-6 py-12">
+      <div className="px-4 md:px-6 pb-12">
       {/* Header */}
-      <div className="pt-28 pb-8 text-center">
+      <div className="pt-24 md:pt-28 pb-8 text-center">
         <p className="text-gold text-xs tracking-[0.5em] uppercase mb-3">Galeri Karya</p>
-        <h1 className="text-4xl font-bold text-white uppercase tracking-widest">Portfolio</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest">Portfolio</h1>
       </div>
 
       {/* Category Filter */}

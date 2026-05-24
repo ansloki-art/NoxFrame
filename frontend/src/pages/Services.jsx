@@ -26,7 +26,7 @@ export default function Services() {
         {/* Header */}
         <div className="text-center mb-12">
           <p className="text-gold text-xs tracking-[0.5em] uppercase mb-3">Harga & Paket</p>
-          <h1 className="text-4xl font-bold text-white uppercase tracking-widest">Layanan</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest">Layanan</h1>
         </div>
 
         {/* Category Filter */}
@@ -49,7 +49,7 @@ export default function Services() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filtered.map(pkg => (
-              <div key={pkg.id} className="border border-gold/20 p-8 hover:border-gold/60 transition-all">
+              <div key={pkg.id} className="border border-gold/20 p-6 md:p-8 hover:border-gold/60 transition-all">
                 <p className="text-gold text-xs tracking-widest uppercase mb-2">Paket</p>
                 <h3 className="text-xl font-bold text-white mb-4">{pkg.name}</h3>
                 <p className="text-3xl font-bold text-gold mb-6">

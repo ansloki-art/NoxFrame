@@ -19,11 +19,11 @@ export default function About() {
 
         <div className="text-center mb-16">
           <p className="text-gold text-xs tracking-[0.5em] uppercase mb-3">Siapa Kami</p>
-          <h1 className="text-4xl font-bold text-white uppercase tracking-widest">Tentang</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest">Tentang</h1>
         </div>
 
         {profile ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
 
             {profile.avatar_url && (
               <div className="overflow-hidden">

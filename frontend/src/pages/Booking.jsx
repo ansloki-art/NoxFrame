@@ -95,7 +95,7 @@ export default function Booking() {
               placeholder="Opsional" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Kategori</label>
               <select name="category_id" value={form.category_id} onChange={handleChange}
