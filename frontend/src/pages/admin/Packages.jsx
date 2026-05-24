@@ -5,6 +5,7 @@ import AdminSidebar from '../../components/AdminSidebar'
 export default function AdminPackages() {
   const [packages, setPackages] = useState([])
   const [categories, setCategories] = useState([])
+  const [editingId, setEditingId] = useState(null)
   const [form, setForm] = useState({
     category_id: '', name: '', description: '',
     price: '', duration_hours: '', includes: ''
@@ -24,22 +25,45 @@ export default function AdminPackages() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  async function handleCreate() {
+  function handleEdit(pkg) {
+    setEditingId(pkg.id)
+    setForm({
+      category_id: pkg.category_id || '',
+      name: pkg.name,
+      description: pkg.description || '',
+      price: pkg.price,
+      duration_hours: pkg.duration_hours,
+      includes: pkg.includes || ''
+    })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function handleCancel() {
+    setEditingId(null)
+    setForm({ category_id: '', name: '', description: '', price: '', duration_hours: '', includes: '' })
+  }
+
+  async function handleSubmit() {
     if (!form.name || !form.price || !form.duration_hours || !form.category_id) {
       alert('Nama, kategori, harga, dan durasi wajib diisi.')
       return
     }
     setLoading(true)
+    const payload = {
+      ...form,
+      price: parseInt(form.price),
+      duration_hours: parseInt(form.duration_hours),
+    }
     try {
-      await api.post('/api/packages', {
-        ...form,
-        price: parseInt(form.price),
-        duration_hours: parseInt(form.duration_hours),
-      })
-      setForm({ category_id: '', name: '', description: '', price: '', duration_hours: '', includes: '' })
+      if (editingId) {
+        await api.put(`/api/packages/${editingId}`, payload)
+      } else {
+        await api.post('/api/packages', payload)
+      }
+      handleCancel()
       fetchPackages()
     } catch {
-      alert('Gagal membuat paket.')
+      alert('Gagal menyimpan paket.')
     } finally {
       setLoading(false)
     }
@@ -53,15 +77,14 @@ export default function AdminPackages() {
 
   return (
     <div className="min-h-screen bg-dark flex">
-
       <AdminSidebar />
-
       <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
         <h2 className="text-2xl font-bold text-white mb-8">Kelola Paket</h2>
 
-        {/* Form Tambah Paket */}
         <div className="border border-gold/20 p-6 mb-10">
-          <h3 className="text-gold text-sm tracking-widest uppercase mb-6">Tambah Paket Baru</h3>
+          <h3 className="text-gold text-sm tracking-widest uppercase mb-6">
+            {editingId ? 'Edit Paket' : 'Tambah Paket Baru'}
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Nama Paket</label>
@@ -98,13 +121,20 @@ export default function AdminPackages() {
                 placeholder="100 foto edit, file RAW, Google Drive link" />
             </div>
           </div>
-          <button onClick={handleCreate} disabled={loading}
-            className="px-8 py-3 bg-gold text-black text-sm tracking-wider uppercase font-bold hover:bg-gold-light transition-colors disabled:opacity-40">
-            {loading ? 'Menyimpan...' : 'Tambah Paket'}
-          </button>
+          <div className="flex gap-3">
+            <button onClick={handleSubmit} disabled={loading}
+              className="px-8 py-3 bg-gold text-black text-sm tracking-wider uppercase font-bold hover:bg-gold-light transition-colors disabled:opacity-40">
+              {loading ? 'Menyimpan...' : editingId ? 'Simpan Perubahan' : 'Tambah Paket'}
+            </button>
+            {editingId && (
+              <button onClick={handleCancel}
+                className="px-8 py-3 border border-white/20 text-white/50 text-sm tracking-wider uppercase hover:border-white/40 transition-all">
+                Batal
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* List Paket */}
         <div className="grid grid-cols-1 gap-4">
           {packages.length === 0 ? (
             <p className="text-white/40">Belum ada paket.</p>
@@ -115,10 +145,16 @@ export default function AdminPackages() {
                 <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours} jam</p>
                 {pkg.includes && <p className="text-white/40 text-xs mt-1">{pkg.includes}</p>}
               </div>
-              <button onClick={() => handleDelete(pkg.id)}
-                className="px-4 py-2 border border-red-400/40 text-red-400 text-xs uppercase tracking-wider hover:bg-red-400 hover:text-black transition-all">
-                Nonaktifkan
-              </button>
+              <div className="flex gap-2">
+                <button onClick={() => handleEdit(pkg)}
+                  className="px-4 py-2 border border-gold/40 text-gold text-xs uppercase tracking-wider hover:bg-gold hover:text-black transition-all">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(pkg.id)}
+                  className="px-4 py-2 border border-red-400/40 text-red-400 text-xs uppercase tracking-wider hover:bg-red-400 hover:text-black transition-all">
+                  Nonaktifkan
+                </button>
+              </div>
             </div>
           ))}
         </div>
