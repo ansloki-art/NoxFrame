@@ -87,9 +87,9 @@ export default function AdminPackages() {
             </div>
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Durasi (jam)</label>
-              <input name="duration_hours" value={form.duration_hours} onChange={handleChange} type="number"
+              <input name="duration_hours" value={form.duration_hours} onChange={handleChange} type="text"
                 className="w-full bg-surface border border-white/10 text-white px-4 py-2 focus:border-gold focus:outline-none"
-                placeholder="3" />
+                placeholder="Durasi" />
             </div>
             <div className="sm:col-span-2">
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Termasuk</label>
