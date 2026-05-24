@@ -91,7 +91,7 @@ export default function AdminPackages() {
                 className="w-full bg-surface border border-white/10 text-white px-4 py-2 focus:border-gold focus:outline-none"
                 placeholder="3" />
             </div>
-            <div className="col-span-2">
+            <div className="sm:col-span-2">
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Termasuk</label>
               <input name="includes" value={form.includes} onChange={handleChange}
                 className="w-full bg-surface border border-white/10 text-white px-4 py-2 focus:border-gold focus:outline-none"
@@ -109,7 +109,7 @@ export default function AdminPackages() {
           {packages.length === 0 ? (
             <p className="text-white/40">Belum ada paket.</p>
           ) : packages.map(pkg => (
-            <div key={pkg.id} className="border border-gold/20 p-6 flex items-center justify-between">
+            <div key={pkg.id} className="border border-gold/20 p-6 flex items-start sm:items-center justify-between gap-4 flex-wrap">
               <div>
                 <p className="text-white font-bold">{pkg.name}</p>
                 <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours} jam</p>

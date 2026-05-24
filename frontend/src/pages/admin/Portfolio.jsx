@@ -6,6 +6,7 @@ export default function AdminPortfolio() {
   const [photos, setPhotos] = useState([])
   const [categories, setCategories] = useState([])
   const [file, setFile] = useState(null)
+  const [preview, setPreview] = useState(null)
   const [categoryId, setCategoryId] = useState('')
   const [caption, setCaption] = useState('')
   const [isFeatured, setIsFeatured] = useState(false)
@@ -31,6 +32,7 @@ export default function AdminPortfolio() {
     try {
       await api.post('/api/portfolio/upload', formData)
       setFile(null)
+      setPreview(null)
       setCategoryId('')
       setCaption('')
       setIsFeatured(false)
@@ -51,22 +53,25 @@ export default function AdminPortfolio() {
 
   return (
     <div className="min-h-screen bg-dark flex">
-
       <AdminSidebar />
-
-      {/* Content */}
       <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
         <h2 className="text-2xl font-bold text-white mb-8">Kelola Portofolio</h2>
 
-        {/* Upload Form */}
         <div className="border border-gold/20 p-6 mb-10">
           <h3 className="text-gold text-sm tracking-widest uppercase mb-6">Upload Foto Baru</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Pilih Foto</label>
               <input type="file" accept="image/*"
-                onChange={e => setFile(e.target.files[0])}
+                onChange={e => {
+                  const f = e.target.files[0]
+                  setFile(f)
+                  if (f) setPreview(URL.createObjectURL(f))
+                }}
                 className="w-full text-white/70 text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gold/40 file:bg-transparent file:text-gold file:text-xs file:uppercase file:tracking-wider" />
+              {preview && (
+                <img src={preview} alt="preview" className="mt-3 h-32 w-auto object-cover border border-gold/20" />
+              )}
             </div>
             <div>
               <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Kategori</label>
@@ -98,8 +103,7 @@ export default function AdminPortfolio() {
           </button>
         </div>
 
-        {/* Photos Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2" style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>
           {photos.map(photo => (
             <div key={photo.id} className="relative group">
               <img src={photo.thumbnail_url} alt={photo.caption || 'foto'}
