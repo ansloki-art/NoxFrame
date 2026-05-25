@@ -14,7 +14,7 @@ const PHOTOGRAPHERS = [
     bio: 'Halo, saya Tafwani atau biasa dipanggil Wany.Saya seorang fotografer yang fokus mengabadikan momen dengan sentuhan natural, emosional, dan estetik. Bagi saya, setiap foto memiliki cerita yang layak dikenang selamanya.Saya terbiasa menangani sesi prewedding, wedding, portrait, wisuda, hingga event dengan konsep yang nyaman dan hasil yang berkelas.',
     photoSrc: foto1,
     instagram: 'https://instagram.com/wany_film_making',
-    tiktok: 'https://tiktok.com/tafwani',              
+    tiktok: 'https://tiktok.com/@tafwani',              
     whatsapp: '082267451998',               
     city: 'Lhokseumawe',
     specialties: ['Wedding', 'Prewedding', 'Wisuda', 'Engagement', 'Dokumentasi'],
