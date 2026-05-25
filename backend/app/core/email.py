@@ -1,6 +1,4 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import httpx
 from app.core.config import settings
 
 def send_booking_confirmation(
@@ -13,10 +11,8 @@ def send_booking_confirmation(
     dp_link: str = None,
     full_link: str = None,
 ):
-    if not client_email:
+    if not client_email or not settings.RESEND_API_KEY:
         return
-
-    subject = "Booking Anda Dikonfirmasi — NoxFrame"
 
     def fmt_rp(amount):
         return f"Rp {amount:,.0f}".replace(",", ".")
@@ -73,7 +69,6 @@ def send_booking_confirmation(
               Halo <strong style="color:#fff;">{client_name}</strong>,<br>
               Booking Anda telah kami konfirmasi. Silakan lakukan pembayaran untuk mengunci jadwal Anda.
             </p>
-
             <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #2a2a2a; margin-bottom:24px;">
               <tr>
                 <td style="padding: 16px 0 8px 0; color:#aaa; font-size:12px; letter-spacing:2px; text-transform:uppercase;">Detail Booking</td>
@@ -87,7 +82,6 @@ def send_booking_confirmation(
                 <td style="padding: 4px 0 16px 0; color:#fff; font-size:14px; text-align:right;">{event_location}</td>
               </tr>
             </table>
-
             <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #2a2a2a; margin-bottom:24px;">
               <tr>
                 <td style="padding: 16px 0 8px 0; color:#aaa; font-size:12px; letter-spacing:2px; text-transform:uppercase;">Pembayaran</td>
@@ -95,7 +89,6 @@ def send_booking_confirmation(
               {dp_section}
               {full_section}
             </table>
-
             <p style="color:#555; font-size:12px; margin:0;">
               Pertanyaan? Hubungi kami via WhatsApp.<br>
               Jadwal akan dikunci setelah DP diterima.
@@ -112,16 +105,19 @@ def send_booking_confirmation(
     </html>
     """
 
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"] = settings.SMTP_FROM
-    msg["To"] = client_email
-    msg.attach(MIMEText(html, "html"))
-
     try:
-        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
-            server.starttls()
-            server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            server.sendmail(settings.SMTP_FROM, client_email, msg.as_string())
+        httpx.post(
+            "https://api.resend.com/emails",
+            headers={
+                "Authorization": f"Bearer {settings.RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "from": "NoxFrame <onboarding@resend.dev>",
+                "to": [client_email],
+                "subject": "Booking Anda Dikonfirmasi — NoxFrame",
+                "html": html,
+            },
+        )
     except Exception as e:
         print(f"Email error: {e}")
