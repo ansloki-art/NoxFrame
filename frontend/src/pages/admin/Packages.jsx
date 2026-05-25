@@ -143,16 +143,7 @@ export default function AdminPackages() {
               <div>
                 <p className="text-white font-bold">{pkg.name}</p>
                 <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours}</p>
-                {pkg.includes && (
-                  <ul className="text-sm mb-8 border-t border-gold/20 pt-4 space-y-2">
-                    {pkg.includes.split(",").map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-white/60">
-                        <span className="text-gold shrink-0 mt-0.5">✓</span>
-                        <span>{item.trim()}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                {pkg.includes && <p className="text-white/40 text-xs mt-1">{pkg.includes}</p>}
               </div>
               <div className="flex gap-2">
                 <button onClick={() => handleEdit(pkg)}

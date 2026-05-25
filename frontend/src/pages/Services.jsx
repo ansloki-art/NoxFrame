@@ -57,9 +57,14 @@ export default function Services() {
                 </p>
                 <p className="text-white/50 text-sm mb-4">{pkg.duration_hours} jam sesi</p>
                 {pkg.includes && (
-                  <p className="text-white/60 text-sm mb-8 border-t border-gold/20 pt-4">
-                    {pkg.includes}
-                  </p>
+                  <ul className="text-sm mb-8 border-t border-gold/20 pt-4 space-y-2">
+                    {pkg.includes.split(",").map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-white/60">
+                        <span className="text-gold shrink-0 mt-0.5">✓</span>
+                        <span>{item.trim()}</span>
+                      </li>
+                    ))}
+                  </ul>
                 )}
                 <Link to="/booking"
                   className="block text-center px-6 py-3 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
