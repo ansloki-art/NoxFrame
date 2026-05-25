@@ -13,6 +13,13 @@ class Settings(BaseSettings):
     R2_ENDPOINT_URL: str
     R2_PUBLIC_URL: str
 
+    # SMTP Email
+    SMTP_HOST: str = "smtp.gmail.com"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    SMTP_FROM: str = ""
+
     model_config = {"env_file": ".env"}
 
 settings = Settings()
