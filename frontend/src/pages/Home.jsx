@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import heroImg from '../assets/NoxFrame.jpeg'
 import api from '../lib/api'
 
@@ -55,13 +56,18 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {photos.map(photo => (
-            <div key={photo.id} className="overflow-hidden">
+            <div key={photo.id} className="overflow-hidden relative group">
               <img
                 src={photo.image_url}
                 alt={photo.caption || 'NoxFrame'}
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
+              {photo.caption && (
+                <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <p className="text-white/90 text-sm tracking-wide">{photo.caption}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -73,6 +79,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Footer />
     </div>
   )
 }

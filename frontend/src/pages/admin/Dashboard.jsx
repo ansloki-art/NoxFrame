@@ -32,15 +32,15 @@ export default function AdminDashboard() {
         <h2 className="text-2xl font-bold text-white mb-2">Selamat Datang</h2>
         <p className="text-white/40 mb-8">Kelola konten NoxFrame dari sini.</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="border border-gold/20 p-6">
+          <div className="border border-gold/20 p-6 hover:border-gold/50 transition-all">
             <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Portofolio</p>
             <p className="text-3xl font-bold text-gold">{stats.portfolio}</p>
           </div>
-          <div className="border border-gold/20 p-6">
+          <div className="border border-gold/20 p-6 hover:border-gold/50 transition-all">
             <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Paket Aktif</p>
             <p className="text-3xl font-bold text-gold">{stats.packages}</p>
           </div>
-          <div className="border border-gold/20 p-6">
+          <div className="border border-gold/20 p-6 hover:border-gold/50 transition-all">
             <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Booking</p>
             <p className="text-3xl font-bold text-gold">{stats.bookings}</p>
           </div>

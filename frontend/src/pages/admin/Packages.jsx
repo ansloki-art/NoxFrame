@@ -140,7 +140,7 @@ export default function AdminPackages() {
           {packages.length === 0 ? (
             <p className="text-white/40">Belum ada paket.</p>
           ) : packages.map(pkg => (
-            <div key={pkg.id} className="border border-gold/20 p-6 flex items-start sm:items-center justify-between gap-4 flex-wrap">
+            <div key={pkg.id} className="border border-gold/20 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <p className="text-white font-bold">{pkg.name}</p>
                 <p className="text-gold text-sm">Rp {pkg.price.toLocaleString('id-ID')} · {pkg.duration_hours}</p>

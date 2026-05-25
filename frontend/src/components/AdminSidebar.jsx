@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 const links = [
   { to: '/admin', label: 'Dashboard' },
@@ -12,6 +12,7 @@ const links = [
 export default function AdminSidebar() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   function handleLogout() {
     localStorage.removeItem('token')
@@ -33,7 +34,7 @@ export default function AdminSidebar() {
         <div className="md:hidden fixed inset-0 z-40 bg-dark pt-14 px-6 flex flex-col gap-1">
           {links.map(item => (
             <Link key={item.to} to={item.to} onClick={() => setOpen(false)}
-              className="block px-4 py-3 text-white/70 hover:text-gold text-sm tracking-wider uppercase transition-colors">
+              className={`block px-4 py-3 text-sm tracking-wider uppercase transition-colors ${pathname === item.to ? 'text-gold' : 'text-white/70 hover:text-gold'}`}>
               {item.label}
             </Link>
           ))}
@@ -53,7 +54,7 @@ export default function AdminSidebar() {
         <nav className="flex-1 p-4 flex flex-col gap-1">
           {links.map(item => (
             <Link key={item.to} to={item.to}
-              className="px-4 py-3 text-white/70 hover:text-gold hover:bg-surface text-sm tracking-wider uppercase transition-all">
+              className={`px-4 py-3 text-sm tracking-wider uppercase transition-all ${pathname === item.to ? 'text-gold bg-surface' : 'text-white/70 hover:text-gold hover:bg-surface'}`}>
               {item.label}
             </Link>
           ))}

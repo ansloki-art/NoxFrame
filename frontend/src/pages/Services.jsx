@@ -49,7 +49,7 @@ export default function Services() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filtered.map(pkg => (
-              <div key={pkg.id} className="border border-gold/20 p-6 md:p-8 hover:border-gold/60 transition-all">
+              <div key={pkg.id} className="border border-gold/20 p-6 md:p-8 hover:border-gold/60 hover:-translate-y-1 transition-all duration-300">
                 <p className="text-gold text-xs tracking-widest uppercase mb-2">Paket</p>
                 <h3 className="text-xl font-bold text-white mb-4">{pkg.name}</h3>
                 <p className="text-3xl font-bold text-gold mb-6">
