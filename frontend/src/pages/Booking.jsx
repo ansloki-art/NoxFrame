@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import api from '../lib/api'
+import toast from 'react-hot-toast'
 
 export default function Booking() {
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ export default function Booking() {
 
   async function handleSubmit() {
     if (!form.client_name || !form.client_phone || !form.event_date || !form.event_location) {
-      alert('Nama, nomor WA, tanggal, dan lokasi wajib diisi.')
+      toast.error('Nama, nomor WA, tanggal, dan lokasi wajib diisi.')
       return
     }
     setLoading(true)
@@ -56,7 +57,7 @@ export default function Booking() {
       await api.post('/api/bookings', payload)
       navigate('/booking/success')
     } catch {
-      alert('Gagal mengirim booking. Coba lagi.')
+      toast.error('Gagal mengirim booking. Coba lagi.')
     } finally {
       setLoading(false)
     }

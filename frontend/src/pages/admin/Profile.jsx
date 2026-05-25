@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
 import AdminSidebar from '../../components/AdminSidebar'
+import toast from 'react-hot-toast'
 
 export default function AdminProfile() {
   const [form, setForm] = useState({
@@ -33,7 +34,7 @@ export default function AdminProfile() {
       setSaved(true)
       setTimeout(() => setSaved(false), 3000)
     } catch {
-      alert('Gagal menyimpan profil.')
+      toast.error('Gagal menyimpan profil.')
     } finally {
       setLoading(false)
     }

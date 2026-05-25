@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
 import Services from './pages/Services'
@@ -14,6 +15,11 @@ import AdminBookings from './pages/admin/Bookings'
 
 function App() {
   return (
+    <>
+    <Toaster position="top-right" toastOptions={{
+      style: { background: '#1a1a1a', color: '#fff', border: '1px solid rgba(201,168,76,0.2)' },
+      success: { iconTheme: { primary: '#C9A84C', secondary: '#000' } },
+    }} />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/portfolio" element={<Portfolio />} />
@@ -28,6 +34,7 @@ function App() {
       <Route path="/admin/profile" element={<AdminProfile />} />
       <Route path="/admin/bookings" element={<AdminBookings />} />
     </Routes>
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
 import AdminSidebar from '../../components/AdminSidebar'
+import toast from 'react-hot-toast'
 
 export default function AdminPortfolio() {
   const [photos, setPhotos] = useState([])
@@ -37,9 +38,9 @@ export default function AdminPortfolio() {
       setCaption('')
       setIsFeatured(false)
       fetchPhotos()
-      alert('Foto berhasil diupload!')
+      toast.success('Foto berhasil diupload!')
     } catch {
-      alert('Gagal upload foto.')
+      toast.error('Gagal upload foto.')
     } finally {
       setUploading(false)
     }

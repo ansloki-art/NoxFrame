@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
 import AdminSidebar from '../../components/AdminSidebar'
+import toast from 'react-hot-toast'
 
 export default function AdminPackages() {
   const [packages, setPackages] = useState([])
@@ -45,7 +46,7 @@ export default function AdminPackages() {
 
   async function handleSubmit() {
     if (!form.name || !form.price || !form.duration_hours || !form.category_id) {
-      alert('Nama, kategori, harga, dan durasi wajib diisi.')
+      toast.error('Nama, kategori, harga, dan durasi wajib diisi.')
       return
     }
     setLoading(true)
@@ -63,7 +64,7 @@ export default function AdminPackages() {
       handleCancel()
       fetchPackages()
     } catch {
-      alert('Gagal menyimpan paket.')
+      toast.error('Gagal menyimpan paket.')
     } finally {
       setLoading(false)
     }
