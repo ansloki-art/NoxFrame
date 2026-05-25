@@ -8,12 +8,12 @@ import foto2 from '../assets/profile2.png'
 const PHOTOGRAPHERS = [
   {
     id: 1,
-    name: 'Nama Fotografer 1',
+    name: 'Tafwani',
     role: 'Lead Photographer',
     tagline: 'Capturing stories through light and shadow',
     bio: 'Ganti dengan bio singkat fotografer. Latar belakang, pengalaman, dan keahlian utama. Sekitar 2-3 kalimat cukup.',
     photoSrc: foto1,
-    instagram: '',              // ganti: https://instagram.com/username
+    instagram: 'https://instagram.com/wany_film_making',              
     whatsapp: '',               // ganti: 628xxxxxxxxxx
     city: 'Kota',
     specialties: ['Wedding', 'Prewedding', 'Portrait'],
