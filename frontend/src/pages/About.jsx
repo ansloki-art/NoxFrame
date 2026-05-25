@@ -87,6 +87,13 @@ function PhotographerCard({ p, reversed }) {
                 Instagram
               </a>
             )}
+            {p.tiktok && (
+              <a href={p.tiktok}
+                target="_blank" rel="noopener noreferrer"
+                className="text-white/40 hover:text-gold transition-colors tracking-wider">
+                Tiktok
+              </a>
+            )}
           </div>
 
           <Link to="/booking"
