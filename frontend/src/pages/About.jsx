@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import foto1 from '../assets/profile1.png'
+import foto1 from '../assets/profile1.jpeg'
 import foto2 from '../assets/profile2.png'
 
 // ── GANTI DATA INI SESUAI KONTEN FOTOGRAFER ──────────────────────────────
