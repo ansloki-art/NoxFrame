@@ -118,13 +118,21 @@ export default function AdminBookings() {
     fetchBookings()
   }
 
+  async function handleDelete(id) {
+    if (!confirm('Hapus booking ini?')) return
+    await api.delete(`/api/bookings/${id}`)
+    fetchBookings()
+  }
+
   function handleConfirmed() {
     setConfirmingBooking(null)
     fetchBookings()
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-dark flex">
+      <AdminSidebar />
+
       {confirmingBooking && (
         <ConfirmModal
           booking={confirmingBooking}
@@ -132,9 +140,8 @@ export default function AdminBookings() {
           onConfirmed={handleConfirmed}
         />
       )}
-      <div className="min-h-screen bg-dark flex">
-        <AdminSidebar />
-        <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
+
+      <main className="flex-1 p-6 md:p-8 pt-20 md:pt-8">
         <h2 className="text-2xl font-bold text-white mb-8">Kelola Booking</h2>
 
         {bookings.length === 0 ? (
@@ -198,13 +205,16 @@ export default function AdminBookings() {
                       Tandai Selesai
                     </button>
                   )}
+                  <button onClick={() => handleDelete(b.id)}
+                    className="px-4 py-2 border border-red-400/20 text-red-400/50 text-xs uppercase tracking-wider hover:bg-red-400/10 transition-all">
+                    Hapus
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </main>
-      </div>
-    </>
+    </div>
   )
 }

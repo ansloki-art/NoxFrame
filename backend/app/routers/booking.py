@@ -68,3 +68,15 @@ def update_status(
     db.commit()
     db.refresh(booking)
     return booking
+
+# ADMIN — hapus booking
+@router.delete("/{booking_id}")
+def delete_booking(
+    booking_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    _=Depends(get_current_owner)
+):
+    booking = db.query(Booking).filter(Booking.id == booking_id).first()
+    db.delete(booking)
+    db.commit()
+    return {"message": "Booking dihapus"}
