@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import foto1 from '../assets/profile1.jpeg'
-import foto2 from '../assets/profile2.png'
+import foto2 from '../assets/profile2.PNG'
 
 // ── GANTI DATA INI SESUAI KONTEN FOTOGRAFER ──────────────────────────────
 const PHOTOGRAPHERS = [
@@ -21,15 +21,16 @@ const PHOTOGRAPHERS = [
   },
   {
     id: 2,
-    name: 'Nama Fotografer 2',
-    role: 'Photographer & Videographer',
-    tagline: 'Every frame tells a thousand words',
-    bio: 'Ganti dengan bio singkat fotografer ke-2. Cerita personal, passion, atau approach unik mereka dalam mendokumentasikan momen.',
+    name: 'Mizwar Anas',
+    role: 'Fotographer & Videographer',
+    tagline: 'Visual yang dibuat dengan rasa dan cerita.',
+    bio: 'Mizwar films adalah fotografer dan cinematography profesional yang berfokus pada cinematic visual, portrait, wedding, fashion, dan commercial photography. Menggabungkan teknik visual modern dengan storytelling emosional sehingga menghasilkan karya yang elegan, timeless, dan berkelas internasional.',
     photoSrc: foto2,
-    instagram: '',              // ganti: https://instagram.com/username
-    whatsapp: '',               // ganti: 628xxxxxxxxxx
-    city: 'Kota',
-    specialties: ['Event', 'Portrait', 'Dokumentasi'],
+    instagram: 'https://instagram.com/mizwar_films',
+    tiktok: 'https://www.tiktok.com/@mizwarfilms',             
+    whatsapp: '+62 812-3085-1823',               
+    city: 'Lhoksemauwe',
+    specialties: ['Weeding', 'Videografi', 'Prewedding'],
   },
 ]
 // ─────────────────────────────────────────────────────────────────────────
