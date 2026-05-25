@@ -9,14 +9,14 @@ const PHOTOGRAPHERS = [
   {
     id: 1,
     name: 'Tafwani',
-    role: 'Lead Photographer',
-    tagline: 'Capturing stories through light and shadow',
-    bio: 'Ganti dengan bio singkat fotografer. Latar belakang, pengalaman, dan keahlian utama. Sekitar 2-3 kalimat cukup.',
+    role: 'Fotographer Utama',
+    tagline: 'Bukan sekadar foto, namun warisan momen yang tak lekang oleh waktu.',
+    bio: 'Halo, saya Tafwani atau biasa dipanggil Wany.Saya seorang fotografer yang fokus mengabadikan momen dengan sentuhan natural, emosional, dan estetik. Bagi saya, setiap foto memiliki cerita yang layak dikenang selamanya.Saya terbiasa menangani sesi prewedding, wedding, portrait, wisuda, hingga event dengan konsep yang nyaman dan hasil yang berkelas.',
     photoSrc: foto1,
     instagram: 'https://instagram.com/wany_film_making',              
-    whatsapp: '',               // ganti: 628xxxxxxxxxx
-    city: 'Kota',
-    specialties: ['Wedding', 'Prewedding', 'Portrait'],
+    whatsapp: '082267451998',               
+    city: 'Lhokseumawe',
+    specialties: ['Wedding', 'Prewedding', 'Wisuda', 'Engagement', 'Dokumentasi'],
   },
   {
     id: 2,
