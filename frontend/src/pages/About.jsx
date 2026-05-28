@@ -21,8 +21,8 @@ const PHOTOGRAPHERS = [
   },
   {
     id: 2,
-    name: 'Mizwar Anas',
-    role: 'Fotographer & Videographer',
+    name: 'Mizwar A.',
+    role: 'Fotographer & Cinematographer',
     tagline: 'Visual yang dibuat dengan rasa dan cerita.',
     bio: 'Mizwar films adalah fotografer dan cinematography profesional yang berfokus pada cinematic visual, portrait, wedding, fashion, dan commercial photography. Menggabungkan teknik visual modern dengan storytelling emosional sehingga menghasilkan karya yang elegan, timeless, dan berkelas internasional.',
     photoSrc: foto2,
