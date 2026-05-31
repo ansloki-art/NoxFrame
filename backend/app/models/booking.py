@@ -1,5 +1,6 @@
 import uuid
 from sqlalchemy import Column, String, DateTime, Text, ForeignKey, Enum, Integer
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from app.core.database import Base
@@ -34,3 +35,14 @@ class Booking(Base):
     full_link = Column(String, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    category = relationship("Category", foreign_keys=[category_id], lazy="joined")
+    package = relationship("Package", foreign_keys=[package_id], lazy="joined")
+
+    @property
+    def category_name(self):
+        return self.category.name if self.category else None
+
+    @property
+    def package_name(self):
+        return self.package.name if self.package else None

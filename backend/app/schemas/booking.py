@@ -32,6 +32,8 @@ class BookingResponse(BaseModel):
     event_location: str
     category_id: Optional[uuid.UUID]
     package_id: Optional[uuid.UUID]
+    category_name: Optional[str] = None
+    package_name: Optional[str] = None
     notes: Optional[str]
     status: BookingStatus
     dp_amount: Optional[int]

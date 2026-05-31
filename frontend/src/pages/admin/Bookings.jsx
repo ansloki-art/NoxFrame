@@ -45,7 +45,12 @@ function ConfirmModal({ booking, onClose, onConfirmed }) {
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
       <div className="bg-surface border border-gold/20 p-6 w-full max-w-md">
         <h3 className="text-white font-bold text-lg mb-1">Konfirmasi Booking</h3>
-        <p className="text-white/40 text-sm mb-6">{booking.client_name} — {booking.event_date}</p>
+        <p className="text-white/40 text-sm mb-1">{booking.client_name} — {booking.event_date}</p>
+        {(booking.category_name || booking.package_name) && (
+          <p className="text-gold/70 text-xs mb-6">
+            {booking.category_name}{booking.category_name && booking.package_name ? ' · ' : ''}{booking.package_name}
+          </p>
+        )}
 
         <div className="space-y-4 mb-6">
           <div>
@@ -164,6 +169,8 @@ export default function AdminBookings() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 text-sm">
                   <p className="text-white/60">📅 {b.event_date}</p>
                   <p className="text-white/60">📍 {b.event_location}</p>
+                  {b.category_name && <p className="text-white/60">🏷️ Kategori: <span className="text-gold">{b.category_name}</span></p>}
+                  {b.package_name && <p className="text-white/60">📦 Paket: <span className="text-gold">{b.package_name}</span></p>}
                   {b.notes && <p className="text-white/50 col-span-2">💬 {b.notes}</p>}
                 </div>
 
