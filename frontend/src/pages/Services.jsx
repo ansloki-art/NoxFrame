@@ -14,12 +14,14 @@ export default function Services() {
     api.get('/api/packages').then(res => setPackages(res.data))
   }, [])
 
+  const byPrice = [...packages].sort((a, b) => a.price - b.price)
+
   const grouped = categories
-    .map(cat => ({ ...cat, pkgs: packages.filter(p => p.category_id === cat.id) }))
+    .map(cat => ({ ...cat, pkgs: byPrice.filter(p => p.category_id === cat.id) }))
     .filter(cat => cat.pkgs.length > 0)
 
   const filtered = activeCategory
-    ? packages.filter(pkg => pkg.category_id === activeCategory)
+    ? byPrice.filter(pkg => pkg.category_id === activeCategory)
     : null
 
   function PackageCard({ pkg }) {
