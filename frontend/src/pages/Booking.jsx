@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import api from '../lib/api'
@@ -106,6 +106,7 @@ function BookingCalendar({ value, onChange, bookedDates }) {
 
 export default function Booking() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [categories, setCategories] = useState([])
   const [packages, setPackages] = useState([])
   const [filteredPackages, setFilteredPackages] = useState([])
@@ -127,6 +128,16 @@ export default function Booking() {
     api.get('/api/packages').then(res => setPackages(res.data))
     api.get('/api/bookings/booked-dates').then(res => setBookedDates(res.data))
   }, [])
+
+  useEffect(() => {
+    if (location.state?.category_id) {
+      setForm(prev => ({
+        ...prev,
+        category_id: location.state.category_id,
+        package_id: location.state.package_id || '',
+      }))
+    }
+  }, [location.state])
 
   useEffect(() => {
     if (form.category_id) {

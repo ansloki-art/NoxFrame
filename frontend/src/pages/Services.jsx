@@ -43,7 +43,7 @@ export default function Services() {
             ))}
           </ul>
         )}
-        <Link to="/booking"
+        <Link to="/booking" state={{ category_id: pkg.category_id, package_id: pkg.id }}
           className="block text-center px-6 py-3 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
           Pesan Sekarang
         </Link>
