@@ -1,5 +1,5 @@
 import uuid
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import get_current_owner
@@ -10,9 +10,23 @@ from typing import List
 
 router = APIRouter(prefix="/api/bookings", tags=["bookings"])
 
+# PUBLIC — tanggal yang sudah dipesan (non-cancelled)
+@router.get("/booked-dates")
+def get_booked_dates(db: Session = Depends(get_db)):
+    rows = db.query(Booking.event_date).filter(
+        Booking.status != BookingStatus.cancelled
+    ).all()
+    return list({r.event_date for r in rows})
+
 # PUBLIC — client submit booking
 @router.post("", response_model=BookingResponse)
 def create_booking(data: BookingCreate, db: Session = Depends(get_db)):
+    conflict = db.query(Booking).filter(
+        Booking.event_date == data.event_date,
+        Booking.status != BookingStatus.cancelled
+    ).first()
+    if conflict:
+        raise HTTPException(status_code=409, detail="Tanggal ini sudah dipesan.")
     booking = Booking(**data.model_dump())
     db.add(booking)
     db.commit()

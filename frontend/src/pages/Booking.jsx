@@ -5,11 +5,14 @@ import Footer from '../components/Footer'
 import api from '../lib/api'
 import toast from 'react-hot-toast'
 
+const today = new Date().toISOString().split('T')[0]
+
 export default function Booking() {
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [packages, setPackages] = useState([])
   const [filteredPackages, setFilteredPackages] = useState([])
+  const [bookedDates, setBookedDates] = useState([])
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     client_name: '',
@@ -25,6 +28,7 @@ export default function Booking() {
   useEffect(() => {
     api.get('/api/categories').then(res => setCategories(res.data))
     api.get('/api/packages').then(res => setPackages(res.data))
+    api.get('/api/bookings/booked-dates').then(res => setBookedDates(res.data))
   }, [])
 
   useEffect(() => {
@@ -37,7 +41,12 @@ export default function Booking() {
   }, [form.category_id, packages])
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    if (name === 'event_date' && bookedDates.includes(value)) {
+      toast.error('Tanggal ini sudah dipesan. Pilih tanggal lain.')
+      return
+    }
+    setForm({ ...form, [name]: value })
   }
 
   async function handleSubmit() {
@@ -56,8 +65,9 @@ export default function Booking() {
       }
       await api.post('/api/bookings', payload)
       navigate('/booking/success')
-    } catch {
-      toast.error('Gagal mengirim booking. Coba lagi.')
+    } catch (err) {
+      const msg = err?.response?.data?.detail
+      toast.error(msg || 'Gagal mengirim booking. Coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -124,7 +134,11 @@ export default function Booking() {
             <label className="text-white/50 text-xs uppercase tracking-wider block mb-2">Tanggal Acara *</label>
             <input name="event_date" value={form.event_date} onChange={handleChange}
               type="date"
+              min={today}
               className="w-full bg-surface border border-white/10 text-white px-4 py-3 focus:border-gold focus:outline-none" />
+            {bookedDates.length > 0 && (
+              <p className="text-white/30 text-xs mt-1">Tanggal yang sudah dipesan tidak tersedia.</p>
+            )}
           </div>
 
           <div>
