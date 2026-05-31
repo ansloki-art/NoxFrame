@@ -145,11 +145,15 @@ export default function Booking() {
     } else {
       setFilteredPackages([])
     }
-    setForm(prev => ({ ...prev, package_id: '' }))
   }, [form.category_id, packages])
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    if (name === 'category_id') {
+      setForm(prev => ({ ...prev, category_id: value, package_id: '' }))
+    } else {
+      setForm({ ...form, [name]: value })
+    }
   }
 
   async function handleSubmit() {
