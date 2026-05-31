@@ -14,9 +14,40 @@ export default function Services() {
     api.get('/api/packages').then(res => setPackages(res.data))
   }, [])
 
+  const grouped = categories
+    .map(cat => ({ ...cat, pkgs: packages.filter(p => p.category_id === cat.id) }))
+    .filter(cat => cat.pkgs.length > 0)
+
   const filtered = activeCategory
     ? packages.filter(pkg => pkg.category_id === activeCategory)
-    : packages
+    : null
+
+  function PackageCard({ pkg }) {
+    return (
+      <div className="border border-gold/20 p-6 md:p-8 hover:border-gold/60 hover:-translate-y-1 transition-all duration-300">
+        <p className="text-gold text-xs tracking-widest uppercase mb-2">Paket</p>
+        <h3 className="text-xl font-bold text-white mb-4">{pkg.name}</h3>
+        <p className="text-3xl font-bold text-gold mb-6">
+          Rp {pkg.price.toLocaleString('id-ID')}
+        </p>
+        <p className="text-white/50 text-sm mb-4">{pkg.duration_hours} jam sesi</p>
+        {pkg.includes && (
+          <ul className="text-sm mb-8 border-t border-gold/20 pt-4 space-y-2">
+            {pkg.includes.split(",").map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-white/60">
+                <span className="text-gold shrink-0 mt-0.5">✓</span>
+                <span>{item.trim()}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <Link to="/booking"
+          className="block text-center px-6 py-3 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
+          Pesan Sekarang
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-dark min-h-screen">
@@ -43,33 +74,30 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Packages Grid */}
-        {filtered.length === 0 ? (
+        {/* Packages */}
+        {packages.length === 0 ? (
           <p className="text-center text-white/40">Belum ada paket tersedia.</p>
+        ) : filtered ? (
+          /* Single category view */
+          filtered.length === 0 ? (
+            <p className="text-center text-white/40">Belum ada paket untuk kategori ini.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {filtered.map(pkg => <PackageCard key={pkg.id} pkg={pkg} />)}
+            </div>
+          )
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {filtered.map(pkg => (
-              <div key={pkg.id} className="border border-gold/20 p-6 md:p-8 hover:border-gold/60 hover:-translate-y-1 transition-all duration-300">
-                <p className="text-gold text-xs tracking-widest uppercase mb-2">Paket</p>
-                <h3 className="text-xl font-bold text-white mb-4">{pkg.name}</h3>
-                <p className="text-3xl font-bold text-gold mb-6">
-                  Rp {pkg.price.toLocaleString('id-ID')}
-                </p>
-                <p className="text-white/50 text-sm mb-4">{pkg.duration_hours} jam sesi</p>
-                {pkg.includes && (
-                  <ul className="text-sm mb-8 border-t border-gold/20 pt-4 space-y-2">
-                    {pkg.includes.split(",").map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-white/60">
-                        <span className="text-gold shrink-0 mt-0.5">✓</span>
-                        <span>{item.trim()}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Link to="/booking"
-                  className="block text-center px-6 py-3 border border-gold text-gold text-sm tracking-wider uppercase hover:bg-gold hover:text-black transition-all">
-                  Pesan Sekarang
-                </Link>
+          /* Semua — grouped by category */
+          <div className="flex flex-col gap-16">
+            {grouped.map(cat => (
+              <div key={cat.id}>
+                <div className="flex items-center gap-4 mb-8">
+                  <h2 className="text-white font-bold text-lg uppercase tracking-widest shrink-0">{cat.name}</h2>
+                  <div className="flex-1 h-px bg-gold/20" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {cat.pkgs.map(pkg => <PackageCard key={pkg.id} pkg={pkg} />)}
+                </div>
               </div>
             ))}
           </div>
